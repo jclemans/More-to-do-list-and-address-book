@@ -81,7 +81,7 @@ end
 def add_task
   puts "Enter your new task description:"
   user_description = gets.chomp
-  task_to_add = Task.new(user_description)
+  task_to_add = Task.create(user_description)
   @current_list.add_task(task_to_add)
   puts "Task added.\n"
   task_menu
