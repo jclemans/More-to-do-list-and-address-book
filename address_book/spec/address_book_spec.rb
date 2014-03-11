@@ -1,6 +1,5 @@
 require 'rspec'
-require 'address_book'
-require 'phones'
+require 'contact'
 
 describe Contact do
   before do
@@ -22,10 +21,10 @@ describe Contact do
     Contact.all.should eq [test_contact]
   end
 
-  describe '.names?' do
+  describe '.getnames' do
     it 'displays all of the names saved in the address book' do
       test_contact = Contact.create('spiderman', '555-234-1111', 'spidey@webcrawler.com', 'gotham city')
-      Contact.names?.should eq ['spiderman']
+      Contact.getnames.should eq ['spiderman']
     end
   end
 
@@ -52,17 +51,9 @@ describe Contact do
 
 end
 
-describe Phone do
 
-  it 'initializes a new phone number object' do
-    test_phone = Phone.new('555-666-7777')
-    test_phone.should be_an_instance_of Phone
-  end
 
-  describe '.create' do
-    it 'makes a new phone instance' do
-      test_phone = Phone.create('555-666-7777')
-      test_phone.should be_an_instance_of Phone
-    end
-  end
-end
+# work_phone = Phone.create('503.555.1212', 'work')
+# home_phone = Phone.create('999.555.1212', 'home')
+# test_email
+# test_address

@@ -15,7 +15,7 @@ class Contact
     @@address_book
   end
 
-  def Contact.names?
+  def Contact.getnames
     names = []
     @@address_book.each do |contact|
       names << contact.name
@@ -23,30 +23,46 @@ class Contact
     names
   end
 
-  def Contact.info?
-    info = []
-    @@address_book.each do |contact|
-      info << contact.display
-    end
-    info
-  end
-
   def save
     @@address_book << self
   end
 
   def initialize(name, phone, email, address)
+    @phones_array = []
     @name = name
     @phone = phone
+    self.phones(@phone)
     @email = email
     @address = address
   end
 
-  def display
-    [@name, @phone, @email, @address]
+  def display_info
+    [@name, @phone.display, @email.display, @address.display]
   end
 
   def name
     @name
   end
+
+
+  def phones(new_phone)
+    @phones_array << new_phone
+  end
+
+  def phone_array
+    @phones_array
+  end
+
+    # @phones = []
+    # @phones << this_new_phone
+    # contact_instance.phones.each { |phone| puts phone.display }
+
+  def email
+    @email
+  end
+
+  def address
+    @address
+  end
+
 end
