@@ -1,5 +1,7 @@
 require 'rspec'
 require 'contact'
+require 'email'
+require 'address'
 
 describe Contact do
   before do
@@ -12,8 +14,11 @@ describe Contact do
   end
 
   it "displays all of a contact's info" do
-    test_contact = Contact.new('spiderman', '555-234-1111', 'spidey@webcrawler.com', 'gotham city')
-    test_contact.display.should eq ['spiderman', '555-234-1111', 'spidey@webcrawler.com', 'gotham city']
+    test_phone = Phone.new('444444')
+    test_email = Email.new('blah@ha.com')
+    test_address = Address.new('505 W Burnside Portland, OR')
+    test_contact = Contact.new('spiderman', test_phone, test_email, test_address)
+    test_contact.display_info.should eq ['spiderman', test_phone.display, test_email.display, test_address.display]
   end
 
   it 'saves the contact info to the address book' do

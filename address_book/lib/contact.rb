@@ -29,11 +29,15 @@ class Contact
 
   def initialize(name, phone, email, address)
     @phones_array = []
+    @email_array = []
+    @address_array = []
     @name = name
     @phone = phone
     self.phones(@phone)
     @email = email
+    self.emails(@email)
     @address = address
+    self.addresses(@address)
   end
 
   def display_info
@@ -44,7 +48,6 @@ class Contact
     @name
   end
 
-
   def phones(new_phone)
     @phones_array << new_phone
   end
@@ -53,9 +56,21 @@ class Contact
     @phones_array
   end
 
-    # @phones = []
-    # @phones << this_new_phone
-    # contact_instance.phones.each { |phone| puts phone.display }
+  def emails(new_email)
+    @email_array << new_email
+  end
+
+  def email_array
+    @email_array
+  end
+
+  def addresses(new_address)
+    @address_array << new_address
+  end
+
+  def address_array
+    @address_array
+  end
 
   def email
     @email

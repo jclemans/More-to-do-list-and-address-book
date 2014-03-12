@@ -4,6 +4,9 @@ require './lib/email'
 require './lib/address'
 
 @current_contact
+@current_phone
+@current_email
+@current_address
 
 def main_menu
   puts "Press 'C' to create a new contact."
@@ -24,16 +27,20 @@ def main_menu
 end
 
 def list_menu
-  puts "Enter a number to edit a contact"
+  puts "Enter a number to view a contact"
   list_choice = gets.chomp.to_i
   @current_contact = Contact.all[list_choice - 1]
   puts Contact.all[list_choice - 1].name
   Contact.all[list_choice - 1].phone_array.each { |x| puts x.display }
+  Contact.all[list_choice - 1].email_array.each { |x| puts x.display }
+  Contact.all[list_choice - 1].address_array.each { |x| puts x.display }
   edit_menu
 end
 
 def edit_menu
   puts "Enter 'P' to add another phone number, 'E' for email, 'A' for address."
+  puts "Enter 'C' to edit a phone number"
+  puts "Enter 'D' to delete this contact"
   puts "Enter 'M' to return to main menu"
   edit_choice = gets.upcase.chomp
   if edit_choice == 'P'
@@ -42,6 +49,10 @@ def edit_menu
     add_email
   elsif edit_choice == 'A'
     add_address
+  elsif edit_choice == 'C'
+    change_phone
+  elsif edit_choice == 'D'
+    remove_contact
   elsif edit_choice == 'M'
     main_menu
   else
@@ -67,12 +78,40 @@ def add_contact
   main_menu
 end
 
+def remove_contact
+  Contact.all.delete(@current_contact)
+  puts "#{@current_contact.name} has been deleted.\n"
+  main_menu
+end
+
 def add_phone
   puts "Enter the new phone number"
   new_phone = gets.chomp
   new_phone = Phone.create(new_phone)
   @current_contact.phones(new_phone)
   edit_menu
+end
+
+def add_email
+  puts "Enter the new email address"
+  new_email = gets.chomp
+  new_email = Email.create(new_email)
+  @current_contact.emails(new_email)
+  edit_menu
+end
+
+def add_address
+  puts "Enter the new address"
+  new_address = gets.chomp
+  new_address = Address.create(new_address)
+  @current_contact.addresses(new_address)
+  edit_menu
+end
+
+def change_phone
+  puts "Enter the new number:"
+  new_phone = gets.chomp
+  @current_phone.edit(new_phone)
 end
 
 def show_contacts

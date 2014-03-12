@@ -24,6 +24,10 @@ class Phone
     @phone
   end
 
+  def edit(new_phone)
+    @phone = new_phone
+  end
+
   def save
     @@phones << self
   end
