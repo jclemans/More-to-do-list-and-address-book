@@ -9,6 +9,7 @@ require './lib/address'
 @current_address
 
 def main_menu
+  puts "***MAIN MENU***\n"
   puts "Press 'C' to create a new contact."
   puts "Press 'D' to display all your contacts."
   puts "Press 'X' exit program."
@@ -27,17 +28,21 @@ def main_menu
 end
 
 def list_menu
+  puts "***LIST MENU***\n"
   puts "Enter a number to view a contact"
   list_choice = gets.chomp.to_i
   @current_contact = Contact.all[list_choice - 1]
+  puts "===CONTACT INFO===\n"
   puts Contact.all[list_choice - 1].name
   Contact.all[list_choice - 1].phone_array.each { |x| puts x.display }
   Contact.all[list_choice - 1].email_array.each { |x| puts x.display }
   Contact.all[list_choice - 1].address_array.each { |x| puts x.display }
+  puts "\n"
   edit_menu
 end
 
 def edit_menu
+  puts "***EDIT MENU***\n"
   puts "Enter 'P' to add another phone number, 'E' for email, 'A' for address."
   puts "Enter 'C' to edit a phone number"
   puts "Enter 'D' to delete this contact"
